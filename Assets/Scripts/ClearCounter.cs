@@ -2,27 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearCounter : MonoBehaviour
+public class ClearCounter : MonoBehaviour, IKitchenObjectParent
 {
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
     [SerializeField] private Transform counterTopPoint;
 
-    private bool isCounterFull = false;
+    private KitchenObject kitchenObject;
 
-    public void Interact()
+    public void Interact(Player player)
     {
-        Debug.Log("Interact!");
-
-        if (!isCounterFull)
+        if (kitchenObject == null)
         {
             Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.GetPrefab(), counterTopPoint);
-            kitchenObjectTransform.localPosition = Vector3.zero;
-            isCounterFull = true;
-            Debug.Log(kitchenObjectTransform.GetComponent<KitchenObject>().GetKitchenObjectSO());
+            kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenOjbectParent(this);
         }
         else
         {
-            Debug.Log("Counter already full, cannot grab a new kitchenObjectSO");
+            kitchenObject.SetKitchenOjbectParent(player);
         }
+    }
+
+    public Transform GetKitchenObjectFollowTransform()
+    {
+        return counterTopPoint;
+    }
+
+    public void SetKitchenObject(KitchenObject kitchenObject)
+    {
+        this.kitchenObject = kitchenObject;
+    }
+
+    public KitchenObject GetKitchenObject()
+    {
+        return kitchenObject;
+    }
+
+    public void ClearKitchenObject()
+    {
+        kitchenObject = null;
+    }
+
+    public bool HasKitchenObject()
+    {
+        return kitchenObject != null;
     }
 }

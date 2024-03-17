@@ -140,9 +140,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent
                 {
                     moveDir = moveDirZ;
                 }
-                else
-                {
-                }
             }
         }
 

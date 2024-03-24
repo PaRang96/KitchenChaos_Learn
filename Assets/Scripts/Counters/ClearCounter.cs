@@ -11,7 +11,6 @@ public class ClearCounter : BaseCounter
         if (!HasKitchenObject())
         {
             // There is no KitchenOjbect
-
             if (player.HasKitchenObject())
             {
                 // Player is carrying KitchenOjbect
@@ -28,10 +27,10 @@ public class ClearCounter : BaseCounter
             // There is KitchenOjbect
             if (player.HasKitchenObject())
             {
-                // Player is carrying something is is plate
+                // Player is carrying a plate
                 if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
                 {
-                    if (plateKitchenObject.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO()))
+                    if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))
                     {
                         GetKitchenObject().DestorySelf();
                     }

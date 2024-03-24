@@ -26,6 +26,7 @@ public class PlateIconsUI : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
+            Debug.Log(child);
             if (child == iconTemplate)
             {
                 continue;
